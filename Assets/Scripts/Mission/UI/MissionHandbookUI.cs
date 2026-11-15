@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using System;
 using System.Globalization;
@@ -317,7 +317,7 @@ namespace MissionArchitect
         string SpreadObjectivesLeft(MissionDefinition def, ObjectiveStatus[] objectives)
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>").Append(def.Name).Append("</b></size>\n");
+            sb.Append("<size=40><b>").Append(def.Name).Append("</b></size>\n");
             sb.Append("<color=").Append(PendingColor).Append(">").Append(def.CodeName)
               .Append("  //  ").Append(def.MissionMonths).Append(" MONTHS ON STATION</color>\n\n");
             sb.Append(Wrap(def.Brief, 64)).Append("\n\n");
@@ -349,7 +349,7 @@ namespace MissionArchitect
         string SpreadObjectivesRight(MissionDefinition def, EngineeringReport report, MonteCarloResult mc)
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>KEY NUMBERS</b></size>\n\n");
+            sb.Append("<size=40><b>KEY NUMBERS</b></size>\n\n");
             sb.Append(Line("EARTH-MOON DISTANCE", F(def.EarthDistanceKm, "0,0") + " km"));
             sb.Append(Line("ONE-WAY LIGHT TIME", F(def.LightTimeOneWayS, "0.00") + " s"));
             sb.Append(Line("CHEMICAL TRANSFER", def.TransferWindow));
@@ -375,7 +375,7 @@ namespace MissionArchitect
         string SpreadGlossaryLeft()
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>HOW IT WORKS</b></size>\n\n");
+            sb.Append("<size=40><b>HOW IT WORKS</b></size>\n\n");
             for (int i = 0; i < 5 && i < MissionStrings.Glossary.Length; i++)
                 sb.Append(GlossaryLine(MissionStrings.Glossary[i])).Append('\n');
             return sb.ToString();
@@ -384,7 +384,7 @@ namespace MissionArchitect
         string SpreadGlossaryRight(EngineeringReport report)
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>HOW IT WORKS</b></size>\n\n");
+            sb.Append("<size=40><b>HOW IT WORKS</b></size>\n\n");
             for (int i = 5; i < MissionStrings.Glossary.Length; i++)
                 sb.Append(GlossaryLine(MissionStrings.Glossary[i])).Append('\n');
 
@@ -400,7 +400,7 @@ namespace MissionArchitect
         string SpreadTips(MissionDefinition def, int from, int to)
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>ENGINEER'S TIPS</b></size>\n\n");
+            sb.Append("<size=40><b>ENGINEER'S TIPS</b></size>\n\n");
             var tips = def.Tips;
             for (int i = from; i < to && i < tips.Length; i++)
             {
@@ -419,7 +419,7 @@ namespace MissionArchitect
         {
             var source = MissionSources.Moon[0];
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>DATA SOURCES</b></size>\n\n");
+            sb.Append("<size=40><b>DATA SOURCES</b></size>\n\n");
             sb.Append("<b>").Append(source.Id).Append(". ").Append(source.Citation).Append("</b>\n");
             sb.Append("<color=").Append(PendingColor).Append(">").Append(source.Url).Append("</color>\n\n");
             sb.Append("<b>Supplies</b>\n").Append(Wrap(source.Supplies, 56)).Append("\n\n");
@@ -432,7 +432,7 @@ namespace MissionArchitect
         string SpreadSourcesRight()
         {
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>HOW TO READ THIS PAGE</b></size>\n\n");
+            sb.Append("<size=40><b>HOW TO READ THIS PAGE</b></size>\n\n");
             sb.Append(Wrap("Every NASA number used by this mission points to the reference number on the left. " +
                            "The values do not change with the design; only the game assumptions around them do.", 56));
             sb.Append("\n\n<b>CREDIT</b>\n");

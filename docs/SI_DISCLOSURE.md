@@ -51,6 +51,7 @@ These files under `Assets/Sprites` were generated with AI:
 - **Pixel font:** Pixelify Sans, local files `Assets/Fonts/PixelifySans-Regular.ttf` and `.asset`. Author, source URL and license: **TODO/CHECK** (likely OFL; confirm).
 - **Door sprite:** source **TODO confirm**. The image used by the outdoor door appears to be `Assets/Sprites/Ekran_görüntüsü_2026-11-14_162258-removebg-preview.png`; confirm the original author and license. This is a generic pixel-art door, not a NASA asset.
 - Full asset source and licensing status: [SOURCES_AND_CREDITS.md](SOURCES_AND_CREDITS.md).
+- **Background music:** `Assets/Resources/Music/bgm` is team-supplied and human-made unless the team says otherwise. Title, artist, license and URL: **TODO** in `Assets/Scripts/Audio/MusicCredit.cs`.
 - These third-party sprites are used as game art only and are not SI-generated.
 
 ## Game design and NASA data
@@ -64,6 +65,20 @@ Mission concepts, mission selection, engineering-data choices and balance decisi
 - `Assets/Scripts/SIAssemblyInfo.cs` adds `AssemblyMetadata("SI-assisted", "true")` and an assembly description.
 - The in-game disclosure is created at startup and persists across scenes: a bottom-left label plus an F1 panel.
 - All three B-key handbooks end with an SI DISCLOSURE spread.
+
+## Polish-pass files (AI-written)
+
+Added in the final polish pass:
+
+- `Assets/Scripts/Audio/MusicPlayer.cs` - persistent looping background music, fade-in, ducking and mute.
+- `Assets/Scripts/Audio/MusicCredit.cs` - title / artist / license / URL constants shown in the F1 panel.
+- `Assets/Editor/MusicImportSettings.cs` - streaming Vorbis import settings for `Assets/Resources/Music`.
+- `Assets/Scripts/Mission/UI/UITextScale.cs` - central readable text scale and the F2 size setting.
+- `Assets/Scripts/UI/ControlsHint.cs` - contextual key-cap hint HUD (H to hide).
+- `Assets/Editor/PolishSetup.cs` - idempotent scene polish: English dialogue and buttons, larger dialogue text, Interior exit door, Mission Lab door check.
+- `Assets/Resources/Fonts/PixelifySans-Regular.asset` - runtime-loadable copy of the Pixelify Sans font asset, so UI created before a scene loads still uses the game font.
+
+Scene text and component values in `Assets/Scenes/Interior.unity` and `Assets/Scenes/MissionLab.unity` (English labels, font sizes, exit door on the Interior scene) were changed by `PolishSetup.cs`, not by hand.
 
 ## Branding check
 

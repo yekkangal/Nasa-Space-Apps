@@ -23,8 +23,8 @@ namespace MissionArchitect
         public static readonly Color GreenDim = Hex("#4E8A66");
         public static readonly Color Amber = Hex("#FFC857");
         public static readonly Color Red = Hex("#FF6B6B");
-        public static readonly Color TextMain = Hex("#CFE8D8");
-        public static readonly Color TextDim = Hex("#7F9A88");
+        public static readonly Color TextMain = Hex("#EAF6FF");
+        public static readonly Color TextDim = Hex("#A9C4D6");
         public static readonly Color Black = Hex("#050907");
 
         // ---- handbook palette ------------------------------------------------
@@ -49,8 +49,15 @@ namespace MissionArchitect
 
         // ---- font -------------------------------------------------------------
 
+        static TMP_FontAsset _pixelFont;
+
         public static TMP_FontAsset ResolveFont(TMP_FontAsset preferred)
         {
+            // The game font must be Pixelify Sans everywhere, including UI built before any scene
+            // loads. Assets/Resources/Fonts keeps a runtime-loadable copy.
+            if (_pixelFont == null)
+                _pixelFont = Resources.Load<TMP_FontAsset>("Fonts/PixelifySans-Regular");
+            if (_pixelFont != null) return _pixelFont;
             if (preferred != null) return preferred;
             if (TMP_Settings.defaultFontAsset != null) return TMP_Settings.defaultFontAsset;
             return Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
@@ -177,6 +184,7 @@ namespace MissionArchitect
             tmp.raycastTarget = false;
             tmp.margin = Vector4.zero;
             tmp.richText = true;
+            UITextScale.Register(tmp, size);
             return tmp;
         }
 

@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using System;
 using System.Collections.Generic;
@@ -296,7 +296,7 @@ namespace MissionArchitect
         {
             var def = report.Definition;
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>").Append(def.Name).Append("</b></size>\n");
+            sb.Append("<size=40><b>").Append(def.Name).Append("</b></size>\n");
             sb.Append("<color=").Append(PendingColor).Append(">").Append(def.CodeName)
               .Append("  //  ").Append(F(MarsConstants.PrimeMissionSols, "0")).Append(" SOLS</color>\n\n");
             sb.Append(Wrap(def.Brief, 62)).Append("\n\n");
@@ -324,7 +324,7 @@ namespace MissionArchitect
             var def = report.Definition;
             var mc = MarsResultStore.MonteCarloResult;
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>KEY NUMBERS</b></size>\n\n");
+            sb.Append("<size=40><b>KEY NUMBERS</b></size>\n\n");
             sb.Append(Line("MARS YEAR", F(MarsConstants.PrimeMissionDays, "0") + " days / " +
                                          F(MarsConstants.PrimeMissionSols, "0") + " sols"));
             sb.Append(Line("LAUNCH WINDOW", "~" + F(MarsConstants.LaunchWindowMonths, "0") + " months"));
@@ -351,7 +351,7 @@ namespace MissionArchitect
         {
             var glossary = new MarsDefinition().Glossary;
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>HOW IT WORKS</b></size>\n\n");
+            sb.Append("<size=40><b>HOW IT WORKS</b></size>\n\n");
             for (int i = from; i < to && i < glossary.Length; i++)
                 sb.Append(GlossaryLine(glossary[i])).Append('\n');
             return sb.ToString();
@@ -361,7 +361,7 @@ namespace MissionArchitect
         {
             var tips = report.Definition.Tips;
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>ENGINEER'S TIPS</b></size>\n\n");
+            sb.Append("<size=40><b>ENGINEER'S TIPS</b></size>\n\n");
             for (int i = from; i < to && i < tips.Length; i++)
                 sb.Append("<color=").Append(PendingColor).Append(">").Append(i + 1).Append(".</color> ")
                   .Append(Wrap(tips[i], 56)).Append("\n\n");
@@ -378,7 +378,7 @@ namespace MissionArchitect
         {
             var refs = MissionSources.Mars;
             var sb = new System.Text.StringBuilder();
-            sb.Append("<size=19><b>DATA SOURCES</b></size>\n\n");
+            sb.Append("<size=40><b>DATA SOURCES</b></size>\n\n");
             for (int i = from; i < to && i < refs.Length; i++)
             {
                 var s = refs[i];

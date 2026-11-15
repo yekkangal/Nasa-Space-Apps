@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 namespace MissionArchitect
 {
@@ -65,12 +65,12 @@ namespace MissionArchitect
 
         public static string HandbookLeft()
         {
-            return "<size=18><b>SI DISCLOSURE</b></size>\n\n" + ShortText;
+            return "<size=40><b>SI DISCLOSURE</b></size>\n\n" + ShortText;
         }
 
         public static string HandbookRight()
         {
-            return "<size=18><b>TOOLS AND ASSETS</b></size>\n\n" +
+            return "<size=40><b>TOOLS AND ASSETS</b></size>\n\n" +
                    "<b>SI TOOLS</b>\n" + Tools + "\n\n" +
                    "<b>AI-GENERATED IMAGES</b>\n" + Images + "\n\n" +
                    "<b>HUMAN-MADE</b>\n" + HumanAssets + "\n\n" +

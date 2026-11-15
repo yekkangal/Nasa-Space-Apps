@@ -8,6 +8,9 @@ namespace MissionArchitect
         public static bool TerminalOpen;
         public static bool HandbookOpen;
 
+        /// <summary>Number of tabs in the current mission terminal (5 Moon/Asteroid, 6 Mars).</summary>
+        public static int TerminalTabs = 5;
+
         public static bool AnyOpen => TerminalOpen || HandbookOpen;
 
         public static void SyncInputLock()

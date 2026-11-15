@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using TMPro;
 using UnityEngine;
@@ -72,7 +72,7 @@ namespace MissionArchitect
             }
 
             _targetPhysics.text =
-                "<size=17><b>" + t.Name.ToUpperInvariant() + "</b></size>\n\n" +
+                "<size=36><b>" + t.Name.ToUpperInvariant() + "</b></size>\n\n" +
                 "DIAMETER            " + F(t.DiameterM, "0") + " m\n" +
                 "RADIUS              " + F(t.RadiusM, "0") + " m\n" +
                 "ROTATION PERIOD     " + F(t.RotationHours, "0.0") + " h\n" +
@@ -95,7 +95,7 @@ namespace MissionArchitect
                 (t.OrbitPass ? AsteroidStrings.StatusPass : AsteroidStrings.StatusFail);
 
             _targetTradeoffs.text =
-                "<size=17><b>MISSION TRADE</b></size>\n\n" +
+                "<size=36><b>MISSION TRADE</b></size>\n\n" +
                 "SCIENCE VALUE       x" + F(t.ScienceMultiplier, "2") + "\n" +
                 "SAMPLE RICHNESS     x" + F(t.SampleRichness, "2") + "\n" +
                 "HAZARD              x" + F(target.HazardFactor, "2") + "\n" +

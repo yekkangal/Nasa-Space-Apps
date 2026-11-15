@@ -103,6 +103,7 @@ namespace MissionArchitect
             ui._panelSprite = panelSprite;
             ui._buttonSprite = buttonSprite;
             ui.Build();
+            MissionUIState.TerminalTabs = 6;
             Instance = ui;
             return ui;
         }

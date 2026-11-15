@@ -8,9 +8,9 @@ public class MissionNPC : MonoBehaviour, IInteractable
 {
     public GameObject dialoguePanel;
     public TMP_Text selectedMissionText;
-    public float labelDuration = 3f;    // yazının ekranda kalma süresi
-    public float labelFadeTime = 0.4f;  // kaybolma süresi
-    public string Prompt => "E to Interact";
+    public float labelDuration = 3f;    // seconds the label stays on screen
+    public float labelFadeTime = 0.4f;  // fade out duration
+    public string Prompt => "E - Talk";
 
     Coroutine labelRoutine;
     Coroutine loadRoutine;
@@ -28,10 +28,10 @@ public class MissionNPC : MonoBehaviour, IInteractable
         GameState.InputLocked = true;
     }
 
-    // Butonlar bunu çağırıyor
+    // The mission buttons call this with the baked internal id ("Ay", "Mars", "Asteroit").
     public void SelectMission(string mission)
     {
-        GameState.SelectedMission = mission;
+        GameState.SelectedMission = GameState.NormalizeMission(mission);
         dialoguePanel.SetActive(false);
         GameState.InputLocked = false;
         ShowLabel();
@@ -55,7 +55,7 @@ public class MissionNPC : MonoBehaviour, IInteractable
 
     IEnumerator LabelRoutine()
     {
-        selectedMissionText.text = "Seçilen görev: " + GameState.SelectedMission;
+        selectedMissionText.text = "Selected mission: " + GameState.DisplayName(GameState.SelectedMission);
         selectedMissionText.alpha = 1f;
         selectedMissionText.gameObject.SetActive(true);
 

@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +8,7 @@ using TMPro;
 public class PlayerInteractor : MonoBehaviour
 {
     public RectTransform promptBox;   // PromptBox
-    public TMP_Text promptText;       // içindeki yazı
+    public TMP_Text promptText;       // label inside the prompt box
     public float yOffset = 0.3f;
 
     IInteractable current;
@@ -37,7 +37,7 @@ public class PlayerInteractor : MonoBehaviour
             promptBox.gameObject.SetActive(show);
             if (show)
             {
-                promptText.text = current.Prompt;
+                if (promptText != null) promptText.text = current.Prompt;
                 LayoutRebuilder.ForceRebuildLayoutImmediate(promptBox);
 
                 Bounds b = currentCol.bounds;

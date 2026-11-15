@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using System.Collections;
 using UnityEngine;
@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class SceneFader : MonoBehaviour
 {
-    const float FadeTime = 0.4f;   // yarım geçiş süresi
-    const int Steps = 6;           // 0 = akıcı, 6 = pixel art gibi kademeli
+    const float FadeTime = 0.4f;   // half-transition duration
+    const int Steps = 6;           // 0 = smooth, 6 = stepped pixel-art fade
 
     static SceneFader instance;
     CanvasGroup group;
@@ -30,7 +30,7 @@ public class SceneFader : MonoBehaviour
         canvas.sortingOrder = 9999;
 
         group = gameObject.AddComponent<CanvasGroup>();
-        group.alpha = 1f;                 // oyun siyahtan açılsın
+        group.alpha = 1f;                 // game opens from black
         group.blocksRaycasts = false;
         group.interactable = false;
 

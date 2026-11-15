@@ -14,6 +14,7 @@ Status legend: **OK** = the source page was found and the value read there durin
 | Astronaut sprite sheet (walk animation) | itch.io, "Free Pixel Art Character Asset - ASTRONAUT" by saraspiegelberg, <https://saraspiegelberg.itch.io/free-pixel-art-character-asset-astronaut> | NO (human-made) | CHECK the license and credit requirement on the page; credit the author by name. |
 | Door sprite | TODO: the source page of the image that was screenshotted (file `Ekran_goruntusu_2026-11-14_162258`) | NO / unknown | TODO: add author, URL and license. If the license is unknown, replace it with an own or SI-generated door only after informing the owner. |
 | Pixel font | Pixelify Sans (`Assets/Fonts/PixelifySans-Regular.ttf` and `.asset`) | NO | TODO/CHECK: author, source URL and license (likely OFL; confirm before submission). |
+| Background music | `Assets/Resources/Music/bgm` (mp3/ogg/wav) | NO (team-supplied unless stated) | TODO: title, artist, license and URL in `Assets/Scripts/Audio/MusicCredit.cs`. |
 
 No image, sprite or UI element contains NASA logos, flags, mission patches or other NASA design elements.
 

@@ -187,8 +187,10 @@ namespace MissionArchitect
             switch (key)
             {
                 case "Mars": return MarsDefinition;
-                case "Asteroit": return AsteroidDefinition;
-                case "Ay": return MoonDefinition;
+                case "Asteroit":
+                case "Asteroid": return AsteroidDefinition;
+                case "Ay":
+                case "Moon": return MoonDefinition;
                 default: return MoonDefinition;
             }
         }

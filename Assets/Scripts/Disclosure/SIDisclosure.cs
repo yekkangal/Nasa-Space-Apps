@@ -35,9 +35,9 @@ namespace MissionArchitect
             group.blocksRaycasts = false;
             group.interactable = false;
 
-            var label = MissionUIFactory.PanelBox(root, "Label", 16, 1018, 640, 44,
+            var label = MissionUIFactory.PanelBox(root, "Label", 16, 1018, 900, 44,
                 MissionUIFactory.PanelFill, MissionUIFactory.BorderColor, null);
-            MissionUIFactory.AddText(label.rectTransform, "Text", 10, 4, 620, 36,
+            MissionUIFactory.AddText(label.rectTransform, "Text", 10, 4, 880, 36,
                 SIDisclosureText.Label, 12, MissionUIFactory.Green, TextAlignmentOptions.MidlineLeft, null);
 
             _panel = MissionUIFactory.Stretch(root, "Panel", 0, 0, 0, 0).gameObject;
@@ -47,8 +47,8 @@ namespace MissionArchitect
             MissionUIFactory.AddText(box.rectTransform, "Title", 20, 12, 1280, 28,
                 "SI DISCLOSURE - F1 TO CLOSE", 18, MissionUIFactory.Green,
                 TextAlignmentOptions.TopLeft, null);
-            MissionUIFactory.AddText(box.rectTransform, "Body", 20, 48, 1280, 740,
-                SIDisclosureText.FullText, 13, MissionUIFactory.TextMain,
+            MissionUIFactory.AddText(box.rectTransform, "Body", 20, 48, 1280, 700,
+                SIDisclosureText.FullText + "\n\n" + MusicCredit.Line, 13, MissionUIFactory.TextMain,
                 TextAlignmentOptions.TopLeft, null);
             _panel.SetActive(false);
         }

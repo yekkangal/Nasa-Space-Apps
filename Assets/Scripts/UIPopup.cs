@@ -1,4 +1,4 @@
-// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+﻿// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
 // Disclosure: docs/SI_DISCLOSURE.md
 using System.Collections;
 using UnityEngine;
@@ -8,7 +8,7 @@ public class UIPopup : MonoBehaviour
 {
     public float duration = 0.18f;
     public float startScale = 0.6f;
-    public int steps = 5;   // 0 = akıcı, 5 = pixel art gibi kademeli
+    public int steps = 5;   // 0 = smooth, 5 = stepped pixel-art motion
 
     CanvasGroup cg;
     Vector3 baseScale;
