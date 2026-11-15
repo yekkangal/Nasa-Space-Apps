@@ -1,3 +1,5 @@
+// SI-assisted: written with AI tools (LLM-generated code). See docs/SI_DISCLOSURE.md.
+// Disclosure: docs/SI_DISCLOSURE.md
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -11,6 +13,7 @@ public class MissionNPC : MonoBehaviour, IInteractable
     public string Prompt => "E to Interact";
 
     Coroutine labelRoutine;
+    Coroutine loadRoutine;
 
     void Start()
     {
@@ -32,6 +35,15 @@ public class MissionNPC : MonoBehaviour, IInteractable
         dialoguePanel.SetActive(false);
         GameState.InputLocked = false;
         ShowLabel();
+
+        if (loadRoutine != null) StopCoroutine(loadRoutine);
+        loadRoutine = StartCoroutine(LoadMissionLab());
+    }
+
+    IEnumerator LoadMissionLab()
+    {
+        yield return new WaitForSeconds(1.2f);
+        SceneFader.LoadScene("MissionLab");
     }
 
     void ShowLabel()

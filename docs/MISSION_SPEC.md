@@ -19,6 +19,7 @@ Sprites: `Assets/Sprites/Environment` (science_lab_interior.png, scientist.png),
 - New scene `Assets/Scenes/MissionLab.unity` (section 7). The player walks to a TERMINAL object; E opens a full-screen terminal UI; Esc or an [X] button closes it. While open: `GameState.InputLocked = true`.
 - Only the Moon mission ("Ay") is fully playable. "Mars" and "Asteroit" must have data-driven `MissionDefinition` entries (placeholder values) and the terminal shows "DATA LINK OFFLINE - mission data arrives in Phase 2" for them.
 - UI language: English (international competition). Keep all strings in one static class so translation is easy.
+- In MissionLab the player can also press **B** to open a pixel-art mission HANDBOOK that lists the objectives (section 6b). Both the terminal and the handbook open with an animation.
 
 ## 3. Mission: LUNAR POLAR ORBITER (Moon)
 Brief: put a science orbiter in a 100 km polar lunar orbit, map the surface and detect water ice at the poles, return the data to Earth, within budget and launch-vehicle limits. Mission life after arrival: 12 months.
@@ -31,6 +32,8 @@ Objectives (id, requirement, points):
 - O5 Power margin >= 15% in every mode - 10 pts
 - O6 Mass <= 95% of launch vehicle capacity to its target orbit - mandatory
 Rating: FULL >= 95 pts and O1,O4,O6 met; PARTIAL >= 50 pts and O1 met; otherwise FAIL. Tune thresholds so a balanced design (Condor-5 or Condor-9, bipropellant, 3-4 instruments, 1.0 m X-band dish, 50 W, 4-6 m2 array) reaches 70-90% success, while "max everything" fails mass or budget.
+
+Objectives are shown live (status updates as the design changes) in the terminal BRIEFING tab AND in the handbook. Both must read the same data, no duplicated logic.
 
 ## 4. Engineering model (pure C#, deterministic functions + Monte Carlo)
 Constants: g0 = 9.80665 m/s2; solar constant 1361 W/m2; Boltzmann -228.6 dBW/K/Hz; c = 299,792.458 km/s; mu_moon = 4902.8 km3/s2; R_moon = 1737.4 km.
@@ -66,10 +69,22 @@ Instruments (mass kg / power W / raw GB/day / cost $M / points): Narrow-angle ca
 - LAUNCH CONTROL: readiness checklist, Monte Carlo result (P(FULL), P(PARTIAL), P(FAIL)), LAUNCH button (allowed even with warnings). On launch: time-accelerated timeline printed like a terminal (phases, month progress bar, random events), then a DEBRIEF: rating, points per objective, auto-generated tips pointing to the weakest constraint, buttons Redesign / Close terminal.
 - P2 (only after everything else works): a command line at the bottom (`help`, `status`, `tab <n>`, `set <part>`, `analyze`, `launch`) that mirrors the clicks.
 
+## 6b. Handbook (press B) and opening animations
+Handbook:
+- Opens/closes with **B** in MissionLab (also closes with Esc or an [X] button). B is ignored while the terminal is open. While open: `GameState.InputLocked = true`. Show a small HUD hint "[B] Handbook" in a screen corner.
+- Look: an open pixel-art book with two pages (paper tone, dark brown cover edge, built from colored Images; sliced `ui_panel` sprite optional), readable pixel-style text, page indicator "1/3".
+- Spread 1 "MISSION OBJECTIVES": left page = mission name, 3-4 line story brief, objectives O1-O6 as a checklist with LIVE status (met / not met / pending) and points; right page = key numbers (Earth-Moon distance, light time, delta-v budget, budget cap, mass limit).
+- Spread 2 "HOW IT WORKS": glossary, one sentence each: delta-v, TLI, LOI, specific impulse (Isp), link margin, eclipse, radiation dose (krad), launch window, payload fraction.
+- Spread 3 "ENGINEER'S TIPS": 6-8 tips about trade-offs (e.g. more instruments -> more mass and power -> bigger array and battery -> heavier -> bigger rocket -> more cost).
+- Navigation: Left/Right arrow keys and clickable page buttons.
+Animations (one reusable static helper `UIAnimations` with coroutines; always unscaled time; stepped frames for a pixel-art feel, `steps` parameter; re-entrancy safe, never leave the UI scaled or offset if interrupted):
+- Terminal open: CRT turn-on. A thin bright horizontal line appears, expands horizontally, then vertically (scaleY 0.02 -> 1) in 5-6 steps over about 0.35 s, then a short boot text types in ("MISSION CONTROL TERMINAL ... READY", about 0.4 s, skippable with any key). Close: reverse, about 0.2 s.
+- Handbook open: slides up from the bottom (offset about 200 px -> 0) while scaling X from 0.1 -> 1 so the cover seems to open, stepped, about 0.35 s. Page change: quick page-flip (X scale 1 -> 0 -> 1 in about 0.15 s). Close: reverse, about 0.2 s.
+
 ## 7. Scene setup automation (Editor)
 Create `Assets/Editor/MissionLabSetup.cs` that, idempotently:
 1. If `Assets/Scenes/MissionLab.unity` does not exist, `AssetDatabase.CopyAsset` the Interior scene to it (find the right source by scanning `Assets/Scenes`).
-2. Opens it, removes the NPC object that has `MissionNPC`, sets the exit `Door.sceneName` to the Interior scene name, adds a TERMINAL GameObject near the top wall (about (0, 2.4)) with `MissionTerminal` (IInteractable, Prompt "E - Open Terminal", trigger BoxCollider2D, builds its own pixel-art monitor sprite in `Awake` if the SpriteRenderer has none), and a `MissionLabBootstrap` GameObject (assigns sprite fields loaded with `AssetDatabase.LoadAssetAtPath`, creates the terminal UI and EventSystem at runtime).
+2. Opens it, removes the NPC object that has `MissionNPC`, sets the exit `Door.sceneName` to the Interior scene name, adds a TERMINAL GameObject near the top wall (about (0, 2.4)) with `MissionTerminal` (IInteractable, Prompt "E - Open Terminal", trigger BoxCollider2D, builds its own pixel-art monitor sprite in `Awake` if the SpriteRenderer has none), and a `MissionLabBootstrap` GameObject (assigns sprite fields loaded with `AssetDatabase.LoadAssetAtPath`, creates the terminal UI, the handbook UI with its B-key listener, and the EventSystem at runtime).
 3. Saves the scene and appends it to `EditorBuildSettings.scenes` if missing.
 4. Runs once automatically (`[InitializeOnLoadMethod]` + `EditorApplication.delayCall`, never during play mode or compilation) and is also available as menu `Tools/Mission Architect/Rebuild Mission Lab scene`.
 
@@ -79,8 +94,9 @@ Tooltips/hint line on hover, color legend, a "design tips" panel, sensible defau
 ## 9. Phases (tick them off in docs/PROGRESS.md)
 - [ ] P0 inspect folders, create PROGRESS.md
 - [ ] P1 core model: MissionDefinition, catalog, design state, engineering calculations, simulator + Monte Carlo (Assets/Scripts/Mission/Core)
-- [ ] P2 terminal UI (Assets/Scripts/Mission/UI)
+- [ ] P2 terminal UI (Assets/Scripts/Mission/UI) including its open/close animation
+- [ ] P2b handbook UI (B key): live objectives, glossary and tips pages, open and page-flip animations, shared UIAnimations helper (Assets/Scripts/Mission/UI)
 - [ ] P3 scene wiring: MissionTerminal, MissionLabBootstrap, MissionNPC edit, Editor setup script
 - [ ] P4 launch timeline + debrief
 - [ ] P5 extras, balance tuning, compile-error pass from Editor.log
-Done = zero compile errors, MissionLab scene exists and is in build settings, selecting the Moon at the NPC leads to the lab, the terminal opens and closes, all five tabs work, launching shows a debrief.
+Done = zero compile errors, MissionLab scene exists and is in build settings, selecting the Moon at the NPC leads to the lab, the terminal opens and closes, all five tabs work, B opens the handbook with live objectives, the terminal and the handbook both open with animations, launching shows a debrief.

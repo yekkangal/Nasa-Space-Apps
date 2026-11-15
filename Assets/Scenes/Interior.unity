@@ -597,7 +597,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.07}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -607,7 +607,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &445342654
 GameObject:
@@ -641,6 +641,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MissionNPC
   dialoguePanel: {fileID: 2008244020}
   selectedMissionText: {fileID: 581135050}
+  labelDuration: 3
+  labelFadeTime: 0.4
 --- !u!61 &445342656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1826,7 +1828,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18.28125
+  orthographic size: 8.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2594,7 +2596,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.004427314, y: 0.0044271573}
+  m_Offset: {x: -0.004427314, y: -0.14}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2604,7 +2606,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.36247373, y: 0.44216484}
+  m_Size: {x: 0.2, y: 0.12}
   m_EdgeRadius: 0
 --- !u!50 &1780254809
 Rigidbody2D:
